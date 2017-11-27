@@ -39,6 +39,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>{{=response.title or request.application}}</title>
   {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
   {{block head}}{{end}}
+
+  <!-- This includes the web2py styles, noticeably the flash banner.
+       However it also brings some visual imperfection to the AdminLTE styles.
+  -->
+  <link rel="stylesheet" href="{{=URL('static','css/web2py-bootstrap3.css')}}"/> <!--
+  Now we need to override the padding and margin defined in app scaffold of web2py 2.14.6
+  --><style>
+  body {padding:0; margin: 0}
+  header {margin:0}
+  </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -419,6 +429,7 @@ desired effect
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{{=URL('static','js/web2py-bootstrap3.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/js/adminlte.min.js"></script>
 
