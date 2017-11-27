@@ -7,7 +7,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -32,6 +31,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <!-- web2py stuffs -->
+  <meta name="application-name" content="{{=request.application}}" />
+  <link rel="shortcut icon" href="{{=URL('static','images/favicon.ico')}}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{=URL('static','images/favicon.png')}}">
+  <title>{{=response.title or request.application}}</title>
+  {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
+  {{block head}}{{end}}
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -54,17 +61,18 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
+<div class="w2p_flash alert alert-dismissable">{{=response.flash or ''}}</div>
 <div class="wrapper">
 
   <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{=URL('default', 'index')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>{{=request.application[0].upper()}}</b>&trade;</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>{{=request.application.title()}}</b>&trade;</span>
     </a>
 
     <!-- Header Navbar -->
@@ -282,6 +290,8 @@ desired effect
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+      {{block header}}
+      <!--
       <h1>
         Page Header
         <small>Optional description</small>
@@ -290,6 +300,8 @@ desired effect
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
       </ol>
+      -->
+      {{end}}
     </section>
 
     <!-- Main content -->
@@ -298,6 +310,9 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+      {{block center}}
+      {{include}}
+      {{end}}
 
     </section>
     <!-- /.content -->
@@ -306,16 +321,19 @@ desired effect
 
   <!-- Main Footer -->
   <footer class="main-footer">
+    {{block footer}}
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+      {{=T('Powered by')}} <a href="http://www.web2py.com/">web2py</a>
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>{{=T('Copyright')}} &copy; {{=request.now.year}} <a href="#">Company</a>.</strong> All rights reserved.
+    {{end}}
   </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
+    {{block right_sidebar}}
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -385,6 +403,7 @@ desired effect
       </div>
       <!-- /.tab-pane -->
     </div>
+    {{end}}
   </aside>
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
