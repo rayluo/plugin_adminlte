@@ -11,7 +11,7 @@ How to use it
 1. You create your own web2py app
    [as usual](http://www.web2py.com/books/default/chapter/29/03/overview#Simple-examples)
 
-2. Download the `web2py.plugin.adminlte.w2p` package from this plugin's
+2. Download the `web2py.plugin.adminlte-X.Y.Z.tar.gz` package from this plugin's
    [github release page](https://github.com/rayluo/plugin_adminlte/releases),
    and then upload it via web2py's built-in admin interface.
    See the bottom of the following screenshot. ![Install a plugin](install.png)
